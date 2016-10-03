@@ -1,0 +1,20 @@
+<div>
+	<div>
+		<h4>Register</h4>
+		<form action="register/" method="post">
+			{% csrf_token %}
+			{{ user_reg_form.as_p }}
+			<label for="c_pw">confirm password</label>
+				<input type="password" id="c_pw" name="confirm_password">			
+			<input type="submit" value="register">
+		</form>
+	</div>
+	<div>
+		<h4>Log In</h4>
+		<form action="login/" method="post">
+			{% csrf_token %}
+			{{ user_log_form.as_p }}
+			<input type="submit" value="log in">
+		</form>
+	</div>
+</div>

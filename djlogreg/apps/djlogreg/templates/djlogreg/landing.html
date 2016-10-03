@@ -1,0 +1,55 @@
+<html>
+<head>
+	<title>
+		Login and Register
+	</title>
+
+</head>
+<body>
+	<div>
+		<div>
+			<h2>Welcome to Login and Registration!</h2>
+			<div>
+				<div>
+					<h4>Register</h4>
+					<form action="/register/" method="post">
+						{% csrf_token %}
+						<label for="r_first">first name:</label>
+						<input type="text" name="r_first">
+						<label for="r_last">last name:</label>
+						<input type="text" name="r_last">
+						<label for="r_username">username:</label>
+						<input type="text" name="r_username">
+						<label for="r_email">email:</label>
+						<input type="text" name="r_email">
+						<label for="r_password">password</label>
+						<input type="password" name="r_password">
+						<label for="r_password2">confirm password</label>
+						<input type="password" name="r_password2">
+						<input type="submit" value="Register">
+					</form>
+					{% with get_flash_messages as messages %}
+						{% if messages %}
+							{% for message in messages %}
+								<p>{{ message }}</p>
+							{% endfor %}
+						{% endif %}
+					{% endwith %}
+				</div>
+				<div>
+					<h4>Login</h4>
+					<form action="/login/" method="post">
+					{% csrf_token%}
+					<label for="l_username">Username</label>
+					<input name="l_username" type="text" >
+					<label for="l_password">Password</label>
+					<input name="l_password" type="password" >
+					<input type="submit" value="Login">	
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

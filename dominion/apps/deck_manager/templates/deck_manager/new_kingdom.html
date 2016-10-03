@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create A Kingdom</title>
+</head>
+<body>
+<div>
+	<h4>Make A Kingdom</h4>
+	<p>Simply select the 10 cards that you wish to include, give the kingdom a name, aaand write any notes like whether you want to include plats, colonys, bane cards, shelters, etc.</p>
+	<div>
+		<!-- this is a searchable and paginated list of available cards -->
+		<table>
+			<thead>
+				<tr>
+					<th>Cost</th>
+					<th>Name</th>
+					<th>Add</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for loop jujus here %}
+					<tr>
+						<td></td>
+						<td></td>
+						<td><a href="">Add!</a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div>
+		<!-- this div is gonna have a list of cards you've added, name, notes -->
+		<ul>
+			<!-- list of cards currently in here -->
+			<!-- should it go here? or outside of form tags? -->
+		</ul>		
+		<form>
+			<label>Kingdom Name:</label>
+			<input type="text" name="kname">
+
+			<input type="hidden" name="card1" value="card1_id_thingy">
+			<label>Kingdom Notes:</label>
+			<input type="text area" name="knotes" placeholder="This is where you put info about extra cards and/or conditions for this set.">
+			<input type="submit" name="kingdomify!">
+		</form>
+	</div>
+</div>
+</body>
+</html>
