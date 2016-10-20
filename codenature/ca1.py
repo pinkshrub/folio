@@ -2,6 +2,8 @@ gen0 = [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0]
 
 def generate(array, generations, rule):
 
+
+
 	def makeruleset(rule):
 		binary_rule = format(rule,"08b")
 		return [i for i in binary_rule]
@@ -34,7 +36,7 @@ def generate(array, generations, rule):
 
 	prev = array
 	for g in range(0, generations):
-		print array
+		print array, g, prev, gen0
 		prev = array
 		for i in range(1,len(array)-1):
 			left = prev[i-1]
@@ -44,4 +46,17 @@ def generate(array, generations, rule):
 			array[i] = newstate
 
 
-generate(gen0,10,9)
+
+# for i in range(0,4):
+# 	print 'this is rule' + str(i)
+# 	generate(gen0,5,i)
+
+print "ruleset the next"
+print gen0
+generate(gen0,10,1)
+print "ruleset the next"
+print gen0
+generate(gen0,10,2)
+print "ruleset the next"
+print gen0
+generate(gen0,10,3)

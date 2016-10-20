@@ -3,16 +3,20 @@
 	<title>
 		Login and Register
 	</title>
+	{% load staticfiles %}
+
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'djlogreg/css/materialize.css' %}"  media="screen,projection"/>
 
 </head>
 <body>
-	<div>
+	<div class="container">
 		<div>
-			<h2>Welcome to Login and Registration!</h2>
-			<div>
-				<div>
+			<h4>Welcome to Login and Registration!</h4>
+			<div class="row">
+				<div class="col s6">
 					<h4>Register</h4>
-					<form action="/register/" method="post">
+					<form action="/register/" method="POST">
 						{% csrf_token %}
 						<label for="r_first">first name:</label>
 						<input type="text" name="r_first">
@@ -28,17 +32,10 @@
 						<input type="password" name="r_password2">
 						<input type="submit" value="Register">
 					</form>
-					{% with get_flash_messages as messages %}
-						{% if messages %}
-							{% for message in messages %}
-								<p>{{ message }}</p>
-							{% endfor %}
-						{% endif %}
-					{% endwith %}
 				</div>
-				<div>
+				<div class="col s6">
 					<h4>Login</h4>
-					<form action="/login/" method="post">
+					<form action="/login/" method="POST">
 					{% csrf_token%}
 					<label for="l_username">Username</label>
 					<input name="l_username" type="text" >
@@ -46,10 +43,21 @@
 					<input name="l_password" type="password" >
 					<input type="submit" value="Login">	
 					</form>
+					<div>
+						{% if messages %}
+							{% for message in messages %}
+								<P>{{ message }}</P>
+							{% endfor %}
+						{% endif %}
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
+    {% block footer %}
+    	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    	<script type="text/javascript" src="{% static 'djlogreg/js/materialize.js' %}"></script>
+    {% endblock %}
 </body>
 </html>

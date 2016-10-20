@@ -5,16 +5,20 @@ import bcrypt, re
 
 # Create your models here.
 class UserManager(models.Manager):
-	
-	EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-
 	def login(self, post_data):
+		user = User.objects.get(username = post_data.POST['l_username'])
+		password = post_data.POST['l_password']
+		print (password)
+		print (user.password)
 		try:
-			user = User.objects.get(username == post_data.POST['l_username'])
+			user = User.objects.get(username = post_data.POST['l_username'])
 			password = post_data.POST['l_password']
-			if bcrypt.hashpw(password, user.password.encode()):
+			print (password)
+			print (user.password)
+			if bcrypt.hashpw(password.encode(), user.password.encode()):
 				return (True, user)
 		except:
+			print "excepted"
 			pass
 		return (False, None)
 
@@ -39,7 +43,8 @@ class UserManager(models.Manager):
 		return (True, new_user)
 
 
-	def validate_registration(post_data):
+	def validate_registration(self, post_data):
+		EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 		# input lengths/presence
 		errors = []
 		if not 2 <= len(post_data.POST['r_first']) <= 45:
@@ -58,17 +63,15 @@ class UserManager(models.Manager):
 			print "error5"
 			errors.append("email needs to be longer than 2")
 		# unique username
-		try:
-			User.objects.get(username = post_data.POST['r_username'])
-		except:
+		if len(User.objects.filter(username = post_data.POST['r_username'])) > 0:
 			print "error6"
 			errors.append("invalid username")
 		# # email is an email
-		if not EMAIL.REGEX.match(post_data.POST['r_email']):
+		if not EMAIL_REGEX.match(post_data.POST['r_email']):
 			print "error7"
 			errors.append('is that really how you email address?')
 		# # password and confirm password match eachother
-		if post_data.POST['r_password'] is not post_data.POST['r_password2']:
+		if not post_data.POST['r_password'] == post_data.POST['r_password2']:
 			print "error8"
 			errors.append("those passwords gotta be the same!")
 		return errors
